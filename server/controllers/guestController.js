@@ -3,6 +3,24 @@ const { ObjectId } = require("mongodb");
 class guestController {
   static async createGuest(req, res, next) {
     try {
+      const { name, idcard, dob } = req.body;
+      if (!name || !idcard || !dob) {
+        throw new Error("All fields are required");
+      }
+      const newGuest = {
+        name: name,
+        idcard: idcard,
+        dob: dob,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      const createdGuest = await req.db
+        .collection("guests")
+        .insertOne(newGuest);
+      res.status(201).json({
+        message: `Guest ${createdGuest.name} created successfully`,
+        guestId: createdGuest.insertedId,
+      });
     } catch (error) {
       next(error);
     }

@@ -59,7 +59,7 @@ class adminController {
       next(error);
     }
   }
-  static async getAdmins(req, res, next) {
+  static async readAdmins(req, res, next) {
     try {
       const allAdmin = await req.db
         .collection("admins")
@@ -70,7 +70,7 @@ class adminController {
       next(error);
     }
   }
-  static async getAdmin(req, res, next) {
+  static async readAdmin(req, res, next) {
     try {
       const _id = req.params.id;
       const foundAdmin = await req.db
@@ -84,7 +84,6 @@ class adminController {
       next(error);
     }
   }
-
   static async deleteAdmin(req, res, next) {
     try {
       const { username, password } = req.body;
