@@ -16,10 +16,10 @@ class roomController {
         createdAt: new Date(),
         updatedAt: new Date(),
       };
-      const result = await req.db.collection("rooms").insertOne(newRoom);
+      const createdRoom = await req.db.collection("rooms").insertOne(newRoom);
       res.status(201).json({
-        message: `Room ${result.name} created successfully`,
-        roomId: result.insertedId,
+        message: `Room ${createdRoom.name} created successfully`,
+        roomId: createdRoom.insertedId,
       });
     } catch (error) {
       next(error);

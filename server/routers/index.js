@@ -11,8 +11,8 @@ router.post("/admin/login", adminController.loginAdmin);
 router.use(authentication);
 
 router.post("/admin/register", adminController.registerAdmin);
-router.get("/admin/all", adminController.getAdmins);
-router.get("/admin/:id", adminController.getAdmin);
+router.get("/admin/all", adminController.readAdmins);
+router.get("/admin/:id", adminController.readAdmin);
 router.post("/admin/delete", adminController.deleteAdmin);
 
 router.post("/room/create", roomController.createRoom);
