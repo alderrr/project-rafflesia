@@ -3,12 +3,12 @@ const { ObjectId } = require("mongodb");
 class roomController {
   static async createRoom(req, res, next) {
     try {
-      const { name, floor, ac, price } = req.body;
-      if (!name || !floor || !ac || !price) {
+      const { number, floor, ac, price } = req.body;
+      if (!number || !floor || !ac || !price) {
         throw new Error("All fields are required");
       }
       const newRoom = {
-        name: name,
+        number: number,
         floor: floor,
         ac: ac,
         price: price,
@@ -17,8 +17,16 @@ class roomController {
         updatedAt: new Date(),
       };
       const createdRoom = await req.db.collection("rooms").insertOne(newRoom);
+
+      const newHistory = {
+        message: `Room ${newRoom.number} created`,
+        author: req.user.username,
+        createdAt: new Date(),
+      };
+      await req.db.collection("histories").insertOne(newHistory);
+
       res.status(201).json({
-        message: `Room ${createdRoom.name} created successfully`,
+        message: `Room ${newRoom.number} created successfully`,
         roomId: createdRoom.insertedId,
       });
     } catch (error) {
@@ -50,7 +58,7 @@ class roomController {
   static async updateRoom(req, res, next) {
     try {
       const _id = req.params._id;
-      const { name, floor, ac, price, occupied } = req.body;
+      const { number, floor, ac, price, occupied } = req.body;
       const foundRoom = await req.db
         .collection("rooms")
         .findOne({ _id: new ObjectId(_id) });
@@ -58,7 +66,7 @@ class roomController {
         throw new Error("Room not found");
       }
       const updatedRoom = {
-        name: name,
+        number: number,
         floor: floor,
         ac: ac,
         price: price,

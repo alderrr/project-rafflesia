@@ -4,7 +4,7 @@ const guestController = require("../controllers/guestController");
 const roomController = require("../controllers/roomController");
 const authentication = require("../middlewares/authentication");
 
-router.get("room/all", roomController.readRooms);
+router.get("/room/all", roomController.readRooms);
 router.get("/room/:id", roomController.readRoom);
 router.post("/admin/login", adminController.loginAdmin);
 

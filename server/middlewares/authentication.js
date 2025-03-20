@@ -18,6 +18,7 @@ const authentication = async (req, res, next) => {
       _id: foundAdmin._id,
       username: foundAdmin.username,
     };
+
     next();
   } catch (error) {
     next(error);
