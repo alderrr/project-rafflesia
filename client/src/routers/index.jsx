@@ -10,6 +10,7 @@ import AdminLoginPage from "../pages/AdminLoginPage";
 import AdminRoomPage from "../pages/AdminRoomPage";
 import AdminGuestPage from "../pages/AdminGuestPage";
 import AdminHistoryPage from "../pages/AdminHistoryPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "*",
-        element: <HomePage />,
+        element: <NotFoundPage />,
       },
       {
         path: "/",

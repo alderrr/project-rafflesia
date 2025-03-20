@@ -54,6 +54,7 @@ class adminController {
       const access_token = signToken({
         username: foundAdmin.username,
       });
+
       res.status(200).json({ access_token: access_token });
     } catch (error) {
       next(error);
